@@ -10,25 +10,17 @@
             <div class="col-12" th:if="${posts.size() > 0}">
                 <div class="table-responsive">
                     <table class="table table-striped">
-                        <!--<thead>
-                        <tr>
-                            <th scope="col">Product name</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Manufacturer</th>
-                            <th scope="col">Category</th>
-                        </tr>
-                        </thead>-->
                         <tbody>
                         <tr th:each="post : ${posts}">
                             <td th:text="${post.getTitle()}"></td>
                             <td th:utext="${post.getContent()}"></td>
-                            <td th:text="${post.getUsername}"></td>
+                            <td th:text="${post.getUsername()}"></td>
                             <td th:text="${post.getCreatedOn()}"></td>
                             <td th:text="${post.getUpdatedOn()}"></td>
-                            <!--<td class="text-right">
+                            <td class="text-right">
                                 <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                                     <form th:method="DELETE"
-                                          th:action="@{'/products/delete/{id}' (id=${product.getId()})}">
+                                          th:action="@{'/posts/delete/{id}' (id=${post.getId()})}">
                                         <button type="submit" class="btn btn-sm btn-danger">
                                             <i class="fa fa-trash">Delete</i>
                                         </button>
@@ -36,17 +28,10 @@
                                 </th:block>
 
                                 <th:block sec:authorize="hasRole('ROLE_ADMIN')">
-                                    <a th:href="@{'/products/edit-form/{id}' (id=${product.getId()})}" class="btn btn-sm btn-info">
+                                    <a th:href="@{'/posts/edit-form/{id}' (id=${post.getId()})}" class="btn btn-sm btn-info">
                                         <i class="fa fa-trash">Edit</i></a>
                                 </th:block>
-
-                                <form th:method="POST"
-                                      th:action="@{'/shopping-cart/add-product/{id}' (id=${product.getId()})}">
-                                    <button type="submit" class="btn btn-sm btn-primary">
-                                        <i class="fa fa-trash">Add product to cart</i>
-                                    </button>
-                                </form>
-                            </td>-->
+                            </td>
                         </tr>
                         </tbody>
                     </table>

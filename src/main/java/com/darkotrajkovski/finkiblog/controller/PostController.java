@@ -43,17 +43,31 @@ public class PostController {
     }
 
     @PostMapping("/add")
-    public String createPost(HttpServletRequest request, @RequestParam String title, @RequestParam String mytextarea) {
-        String username = request.getRemoteUser();
-        postService.createPost(title, mytextarea, username);
+    public String createPost(@RequestParam(required = false) Long id, HttpServletRequest request, @RequestParam String title, @RequestParam String mytextarea) {
+        if(id != null){
+            postService.edit(id, title, mytextarea);
+        } else{
+            String username = request.getRemoteUser();
+            postService.createPost(title, mytextarea, username);
+        }
         return "redirect:/posts";
     }
 
-
-
-    /*@GetMapping("/get/{id}")
-    public ResponseEntity<PostDto> getSinglePost(@PathVariable @RequestBody Long id) {
-        return new ResponseEntity<>(postService.readSinglePost(id), HttpStatus.OK);
+    @DeleteMapping("/delete/{id}")
+    public String deleteProduct(@PathVariable Long id){
+        postService.deleteById(id);
+        return "redirect:/posts";
     }
-*/
+
+    @GetMapping("/edit-form/{id}")
+    public String editProductPage(@PathVariable Long id, Model model){
+        if(postService.findById(id).isPresent()){
+            Post post = postService.findById(id).get();
+            model.addAttribute("post", post);
+            model.addAttribute("bodyContent", "add-post");
+            return "master-template";
+        }
+        return "redirect:/posts?error=ProductNotFound";
+    }
+
 }

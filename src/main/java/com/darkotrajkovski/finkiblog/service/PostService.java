@@ -15,6 +15,8 @@ import java.util.stream.Collectors;
 public interface PostService {
     List<Post> listAllPosts();
     void createPost(String title, String content, String username);
+    void edit(Long id, String title, String content);
+    void deleteById(Long id);
     Optional<Post> findById(Long id);
 
 }
