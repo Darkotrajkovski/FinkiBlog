@@ -35,4 +35,14 @@ public class Post {
     @NotBlank
     private String username;
 
+    public Post(@NotBlank String title, @NotEmpty String content, @NotBlank String username) {
+        this.title = title;
+        this.content = content;
+        this.createdOn = Instant.now();
+        this.updatedOn = Instant.now();
+        this.username = username;
+    }
+
+    public Post() {
+    }
 }

@@ -1,0 +1,35 @@
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+<script>
+    tinymce.init({
+        selector: '#mytextarea'
+    });
+</script>
+
+
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">FINKI Blog</h1>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <form action="/posts/add" method="post">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" id="title" name="title" class="form-control" placeholder="Title">
+                    </div>
+                    <div class="form-group">
+                        <label>Body</label>
+                        <textarea id="mytextarea" name="mytextarea">Hello, World!</textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a type="button" class="btn btn-primary" href="/products">Back</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</th:block>

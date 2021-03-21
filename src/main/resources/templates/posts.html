@@ -1,0 +1,64 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">FINKI Blog</h1>
+        </div>
+    </section>
+
+    <div class="container mb-5">
+        <div class="row">
+            <div class="col-12" th:if="${posts.size() > 0}">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <!--<thead>
+                        <tr>
+                            <th scope="col">Product name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Manufacturer</th>
+                            <th scope="col">Category</th>
+                        </tr>
+                        </thead>-->
+                        <tbody>
+                        <tr th:each="post : ${posts}">
+                            <td th:text="${post.getTitle()}"></td>
+                            <td th:utext="${post.getContent()}"></td>
+                            <td th:text="${post.getUsername}"></td>
+                            <td th:text="${post.getCreatedOn()}"></td>
+                            <td th:text="${post.getUpdatedOn()}"></td>
+                            <!--<td class="text-right">
+                                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                                    <form th:method="DELETE"
+                                          th:action="@{'/products/delete/{id}' (id=${product.getId()})}">
+                                        <button type="submit" class="btn btn-sm btn-danger">
+                                            <i class="fa fa-trash">Delete</i>
+                                        </button>
+                                    </form>
+                                </th:block>
+
+                                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                                    <a th:href="@{'/products/edit-form/{id}' (id=${product.getId()})}" class="btn btn-sm btn-info">
+                                        <i class="fa fa-trash">Edit</i></a>
+                                </th:block>
+
+                                <form th:method="POST"
+                                      th:action="@{'/shopping-cart/add-product/{id}' (id=${product.getId()})}">
+                                    <button type="submit" class="btn btn-sm btn-primary">
+                                        <i class="fa fa-trash">Add product to cart</i>
+                                    </button>
+                                </form>
+                            </td>-->
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col mb-3">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12">
+                        <a href="/posts/add-post" class="btn btn-block btn-dark">Add new product</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>

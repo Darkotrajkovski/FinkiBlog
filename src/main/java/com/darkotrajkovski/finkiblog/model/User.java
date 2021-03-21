@@ -23,9 +23,6 @@ public class User implements UserDetails {
     private String username;
 
     @Column
-    private String email;
-
-    @Column
     private String password;
 
     private boolean isAccountNonExpired = true;
@@ -33,9 +30,22 @@ public class User implements UserDetails {
     private boolean isCredentialsNonExpired = true;
     private boolean isEnabled = true;
 
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
+
+    public User(String username, String password, Role role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
+    public User() {
+
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
+        return Collections.singletonList(role);
     }
 
     @Override
