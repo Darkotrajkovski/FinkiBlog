@@ -1,5 +1,5 @@
 package com.darkotrajkovski.finkiblog.service;
-
+import com.darkotrajkovski.finkiblog.exceptions.PostNotFoundException;
 import com.darkotrajkovski.finkiblog.model.Post;
 import com.darkotrajkovski.finkiblog.model.User;
 import com.darkotrajkovski.finkiblog.repository.PostRepository;

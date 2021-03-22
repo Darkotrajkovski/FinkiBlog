@@ -29,10 +29,12 @@
                                 Posted on <b th:text="${post.getDateCreatedOn()}"></b> by
                                 <a th:href="@{'/posts-per-user/{username}' (username=${post.getUsername()})}"><b th:text="${post.getUsername()}"></b></a>
                                 <th:block sec:authorize="hasRole('ROLE_ADMIN')">
-                                    <button th:method="DELETE"
-                                            th:action="@{'/posts/delete/{id}' (id=${post.getId()})}" type="submit" class="btn btn-sm btn-danger">
-                                        <i class="fa fa-trash">Delete</i>
-                                    </button>
+                                    <form th:method="DELETE"
+                                          th:action="@{'/posts/delete/{id}' (id=${post.getId()})}">
+                                        <button  type="submit" class="btn btn-sm btn-danger">
+                                            <i class="fa fa-trash">Delete</i>
+                                        </button>
+                                    </form>
                                 </th:block>
                                 <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                                     <a th:href="@{'/posts/edit-form/{id}' (id=${post.getId()})}" class="btn btn-sm btn-info">
