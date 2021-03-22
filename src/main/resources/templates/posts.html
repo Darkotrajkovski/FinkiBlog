@@ -1,49 +1,57 @@
 <th:block xmlns:th="http://www.thymeleaf.org">
     <section class="jumbotron text-center">
         <div class="container">
-            <h1 class="jumbotron-heading">FINKI Blog</h1>
+            <h1 class="jumbotron-heading">ФИНКИ БЛОГ</h1>
         </div>
     </section>
 
-    <div class="container mb-5">
+    <div class="container">
         <div class="row">
-            <div class="col-12" th:if="${posts.size() > 0}">
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <tbody>
-                        <tr th:each="post : ${posts}">
-                            <td th:text="${post.getTitle()}"></td>
-                            <td th:utext="${post.getContent()}"></td>
-                            <td th:text="${post.getUsername()}"></td>
-                            <td th:text="${post.getCreatedOn()}"></td>
-                            <td th:text="${post.getUpdatedOn()}"></td>
-                            <td class="text-right">
-                                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
-                                    <form th:method="DELETE"
-                                          th:action="@{'/posts/delete/{id}' (id=${post.getId()})}">
-                                        <button type="submit" class="btn btn-sm btn-danger">
-                                            <i class="fa fa-trash">Delete</i>
-                                        </button>
-                                    </form>
-                                </th:block>
+            <div class="col-md-8">
+                <div class="col mb-3">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <a href="/posts/add-post" class="btn btn-block btn-dark">Напиши статија</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Blog Post -->
 
+                <div th:if="${posts.size() > 0}">
+                    <div th:each="post : ${posts}">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h2 class="card-title" th:text="${post.getTitle()}"></h2>
+                                <p th:utext="${post.getContent()}"></p>
+                                <!--<a href="#" class="btn btn-primary">Read More &rarr;</a>-->
+                            </div>
+                            <div class="card-footer text-muted">
+                                Posted on <b th:text="${post.getDateCreatedOn()}"></b> by
+                                <a th:href="@{'/posts-per-user/{username}' (username=${post.getUsername()})}"><b th:text="${post.getUsername()}"></b></a>
+                                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                                    <button th:method="DELETE"
+                                            th:action="@{'/posts/delete/{id}' (id=${post.getId()})}" type="submit" class="btn btn-sm btn-danger">
+                                        <i class="fa fa-trash">Delete</i>
+                                    </button>
+                                </th:block>
                                 <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                                     <a th:href="@{'/posts/edit-form/{id}' (id=${post.getId()})}" class="btn btn-sm btn-info">
                                         <i class="fa fa-trash">Edit</i></a>
                                 </th:block>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+                            </div>
+                        </div>
+                    </div>
             </div>
-            <div class="col mb-3">
-                <div class="row">
-                    <div class="col-sm-12 col-md-12">
-                        <a href="/posts/add-post" class="btn btn-block btn-dark">Add new product</a>
+        </div>
+            <!-- Sidebar Widgets Column -->
+            <div class="col-md-4">
+                <div class="card my-4">
+                    <h5 class="card-header">Упатство</h5>
+                    <div class="card-body">
+                        Со кликање на копчето "Напиши статија" може да креирате нова статија
                     </div>
                 </div>
             </div>
-        </div>
+    </div>
     </div>
 </th:block>

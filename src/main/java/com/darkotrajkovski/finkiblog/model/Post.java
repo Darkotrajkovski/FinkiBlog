@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.time.Instant;
+import java.util.Date;
 
 @Entity
 @Table
@@ -20,7 +21,7 @@ public class Post {
     @Column
     private String title;
 
-    @Lob
+    //@Lob
     @Column
     @NotEmpty
     private String content;
@@ -41,6 +42,14 @@ public class Post {
         this.createdOn = Instant.now();
         this.updatedOn = Instant.now();
         this.username = username;
+    }
+
+    public Date getDateCreatedOn() {
+        return Date.from(this.createdOn);
+    }
+
+    public Date getDateUpdatedOn() {
+        return Date.from(this.updatedOn);
     }
 
     public Post() {

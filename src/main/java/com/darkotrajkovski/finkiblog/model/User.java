@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 @Entity
 @Table(name = "post_user")
@@ -29,6 +30,9 @@ public class User implements UserDetails {
     private boolean isAccountNonLocked = true;
     private boolean isCredentialsNonExpired = true;
     private boolean isEnabled = true;
+
+    @OneToMany(mappedBy = "user")
+    private List<PostsPerUser> posts;
 
     @Enumerated(value = EnumType.STRING)
     private Role role;

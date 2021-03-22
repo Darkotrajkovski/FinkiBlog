@@ -3,6 +3,7 @@ package com.darkotrajkovski.finkiblog.controller;
 import com.darkotrajkovski.finkiblog.model.Post;
 import com.darkotrajkovski.finkiblog.model.User;
 import com.darkotrajkovski.finkiblog.service.PostService;
+import com.darkotrajkovski.finkiblog.service.PostsPerUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +20,11 @@ import java.util.List;
 public class PostController {
 
     private final PostService postService;
+    private final PostsPerUserService postsPerUserService;
 
-    public PostController(PostService postService) {
+    public PostController(PostService postService, PostsPerUserService postsPerUserService) {
         this.postService = postService;
+        this.postsPerUserService = postsPerUserService;
     }
 
     @GetMapping
@@ -49,6 +52,7 @@ public class PostController {
         } else{
             String username = request.getRemoteUser();
             postService.createPost(title, mytextarea, username);
+
         }
         return "redirect:/posts";
     }
