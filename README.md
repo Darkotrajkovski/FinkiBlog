@@ -6,6 +6,8 @@
 
 ![](images/login.png)
 
+![](images/novastatija.png)
+
 По објавувањето статиите можат да се променат или пак избришат
 
 ![](images/posts.png)
